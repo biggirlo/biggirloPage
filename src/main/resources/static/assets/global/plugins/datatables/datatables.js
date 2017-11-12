@@ -78085,11 +78085,12 @@ window.pdfMake = window.pdfMake || {}; window.pdfMake.vfs = {"LICENSE.txt":"DQog
 		var baseAjax = {
 			"data": data,
 			"success": function (json) {
+                if( json.code && json.code != null && json.code == sysCode.UN_LOGIN)
+                    window.location.href = context.config.serviceName +  context.url.login;
 				var error = json.error || json.sError;
 				if ( error ) {
 					_fnLog( oSettings, 0, error );
 				}
-	
 				oSettings.json = json;
 				callback( json );
 			},
