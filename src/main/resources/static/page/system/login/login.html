@@ -1,0 +1,46 @@
+<!--
+   该项目仅供学习
+   如有疑问或建议请致邮箱：645614025@qq.com
+  Created by 王雁欣
+  Date: 2017/10/17
+  Time: 21:09
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>biggirlos | 基础框架</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="css/login.css" rel="stylesheet">
+
+
+</head>
+<body>
+    <div id="userApp">
+        <div>biggirlos | 后台管理</div>
+        <form id="userForm">
+            <input id="userCode" name="userCode" v-model="userForm.userCode"  placeholder="请输入用户编码">
+            <input type="password" id="password" name="password" v-model="userForm.password"  placeholder="请输入用户密码">
+            <button type="button" @click="login">提交</button>
+        </form>
+    </div>
+    <script src="../../../assets/global/plugins/jquery.min.js"></script>
+    <!-- jquery 表单插件 -->
+    <script src="../../../assets/global/plugins/jquery.form.min.js" type="text/javascript" ></script>
+    <!-- 表单校验插件 -->
+    <script src="../../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../assets/global/plugins/jquery-validation/js/localization/messages_zh.min.js" type="text/javascript"></script>
+    <script src="../../../assets/global/plugins/jquery-validation/js/jquery.validata.config.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <!-- TOASTR -->
+    <script src="../../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
+    <script src="../../../assets/pages/scripts/ui-toastr.min.js" type="text/javascript" ></script>
+    <script src="../../../common/common.js"></script>
+    <!--vue.js-->
+    <script src="../../../assets/global/plugins/vue/vue.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
