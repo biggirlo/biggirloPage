@@ -10,6 +10,9 @@ var index = {
     init:function(){
         index.method.menus(context.config.requestHost + index.url.menus);
     },
+    page:{
+        reLoadPageCount: 0 //重复加载次数
+    },
     method: {
         /**
          *加载页面
@@ -36,13 +39,26 @@ var index = {
                         toastr.success('加载成功！','成功');
                 },
                 error:function(jqXHR, textStatus, errorThrown) {
-                    if(!url ||  jqXHR.status == 404 || jqXHR.status  == 0) {
+                    if((!url ||  jqXHR.status == 404 || jqXHR.status  == 0) && index.method.isNextLoad404Page()) {
                         toastr.error("找不到指定页面！","失败");
-                        index.method.loadPage("/page/error/404.html",true);
+                        index.method.loadPage(context.config.serviceName +"/page/error/404.html",true);
                     }else
                         toastr.error("加载失败！","失败");
                 }
             });
+        },
+        /**
+         * 判断是否需要加载404页面
+         */
+        isNextLoad404Page:function () {
+            if(index.page.reLoadPageCount == 0){
+                index.page.reLoadPageCount++;
+                setTimeout(function () {
+                    index.page.reLoadPageCount = 0;
+                },1000 * index.page.reLoadPageCount);
+                return true;
+            }else
+                return false
         },
         /**
          * 加载菜单的方法

@@ -15,17 +15,59 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
     <link href="css/login.css" rel="stylesheet">
-
-
+    <link href="css/loginPosition.css" rel="stylesheet">
+    <link href="css/loginStyle.css" rel="stylesheet">
 </head>
 <body>
-    <div id="userApp">
-        <div>biggirlos | 后台管理</div>
-        <form id="userForm">
-            <input id="userCode" name="userCode" v-model="userForm.userCode"  placeholder="请输入用户编码">
-            <input type="password" id="password" name="password" v-model="userForm.password"  placeholder="请输入用户密码">
-            <button type="button" @click="login">提交</button>
-        </form>
+    <div id="userApp" class="login-position-app">
+        <!---->
+        <div class="login-logo">
+            <div class="login-logo-img">
+                <img src="image/logo.png">
+            </div>
+            <div class="login-logo-text">
+                biggirlos
+            </div>
+            <div class="login-big-logo">
+                <img src="image/bg-1.jpg">
+            </div>
+            <div class="login-from">
+                <div class="login-from-title">biggirlos | 后台管理</div>
+                <div class="splace-1"></div>
+                <form id="userForm">
+                    <div class="login-from-input">
+                        <div class="login-input-name">用户名</div>
+                        <input id="userCode" name="userCode" v-model="userForm.userCode"  placeholder="请输入用户编码">
+                    </div>
+                    <div class="login-from-input">
+                        <div class="login-input-name">密码</div>
+                        <input class="" type="password" id="password" name="password" v-model="userForm.password"  placeholder="请输入用户密码">
+                    </div>
+                    <div class="login-from-btn">
+                        <button type="button" @click="login" class="btn btn-commit">提交</button>
+                        <button type="button" @click="reset" class="btn btn-reset">重置</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="login-footer">
+            <div class="login-footer-msg">
+                <div class="footer-msg-title" >联系老王</div>
+                <span>QQ:645614025</span>
+                <br>
+                <span>WX:w645614025</span>
+            </div>
+            <div class="login-footer-msg">
+                <div class="footer-msg-title">备案号</div>
+                <span>目前这些我还不知道写什么目前这些我还不知道写</span>
+            </div>
+            <div class="login-footer-msg">
+                <div class="footer-msg-title">版权信息</div>
+                <span>目前这些我还不知道写什么目前这些我还不知道写什么</span>
+                <br>
+                <span>目前这些我还不知道写什么目前这些我还不知道写什么</span>
+            </div>
+        </div>
     </div>
     <script src="../../../assets/global/plugins/jquery.min.js"></script>
     <!-- jquery 表单插件 -->

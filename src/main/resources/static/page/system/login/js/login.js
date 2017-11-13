@@ -33,6 +33,10 @@ $(function () {
                     toastr.error("登录失败","失败")
                 });
             },
+            reset:function () {
+                this.userForm.userCode = null;
+                this.userForm.password = null;
+            },
             userValidate:function (el) {
                 return $("#userForm").validate({
                     rules:{
