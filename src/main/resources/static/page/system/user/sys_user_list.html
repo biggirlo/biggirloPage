@@ -19,18 +19,18 @@
                         <span class="caption-subject font-blue-sharp bold uppercase">用户管理</span>
                     </div>
                     <div class="actions">
-                        <button class="btn btn-circle btn-icon-only btn-default btn-red" href="javascript:;" title="新增加用户" v-on:click="addUser">
+                        <button class="btn btn-circle btn-icon-only btn-default btn-red" href="javascript:;" title="新增加用户" @click="addUser">
                             <i class="fa fa-user-plus font-blue-sharp"></i>
                         </button>
                         <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="删除用户" @click="del">
                             <i class="fa fa-user-times font-red-mint"></i>
                         </a>
-                        <button class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="编辑用户" v-on:click="editUser">
+                        <button class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="编辑用户" @click="editUser">
                             <i class="fa fa-pencil-square-o font-blue-sharp"></i>
                         </button>
-                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="重置密码">
+                        <button class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="重置密码" @click="resetPassword">
                             <i class="fa fa-unlock font-green-jungle"></i>
-                        </a>
+                        </button>
                         <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="刷新列表" @click="reload">
                             <i class="fa fa-refresh font-yellow-lemon"></i>
                         </a>
@@ -46,6 +46,7 @@
     <!--js文件-->
     <input type="hidden" id="pageSrcipt" value="/page/system/user/js/sys_user.js">
 
+
     <!--新增，编辑菜单模态窗口start-->
     <div class="portlet-body">
         <div class="modal fade bs-modal-lg" id="editUserModal" role="dialog" aria-hidden="true">
@@ -60,7 +61,7 @@
                         <form class="form-horizontal" role="form" id="userFrom"  method="post" >
                             <input type="hidden" id="id" name="id" value="" v-model="userFrom.id">
                             <div class="form-body">
-                                <div class="form-group">
+                                <div class="form-group" v-if="!isEditPassword">
                                     <label class="col-md-2 control-label">登录名称</label>
                                     <div class="col-md-4">
                                         <div class="input-inline">
@@ -95,7 +96,7 @@
                                         </div>
                                     </div>-->
                                 </div>
-                                <div class="form-group" v-if="!userFrom.id">
+                                <div class="form-group" v-if="!userFrom.id || isEditPassword">
                                     <label class="col-md-2 control-label">密码</label>
                                     <div class="col-md-4">
                                         <div class="input-inline">
@@ -130,7 +131,7 @@
                                          </div>
                                      </div>-->
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" v-if="!isEditPassword">
                                     <label class="col-md-2 control-label">用户昵称</label>
                                     <div class="col-md-4">
                                         <div class="input-inline">
@@ -154,7 +155,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" v-if="!isEditPassword">
                                     <label class="col-md-2 control-label" >是否启用</label>
                                     <div class="col-md-4">
                                         <div class="md-radio-inline">

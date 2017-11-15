@@ -26,7 +26,8 @@ $(function () {
             },
             url:{
                 save:context.config.requestHost + '/sys/user/info'
-            }
+            },
+            isEditPassword:false
         },
         //init后初始化
         mounted:function () {
@@ -79,11 +80,13 @@ $(function () {
             },
             addUser:function () {
                 this.resetting();
+                this.isEditPassword = false;
                 this.userModal.title = "新增";
                 this.userModal.el.modal('show');
             },
             editUser:function () {
                 this.resetting();
+                this.isEditPassword = false;
                 this.userModal.title = "编辑";
                 var rows = this.dataTable.rows({selected:true});
                 if(rows.data().length != 1){
@@ -93,6 +96,7 @@ $(function () {
                 var self = this;
                 context.method.get(context.config.requestHost + "/sys/user/" + rows.data()[0].id ,function (requset) {
                     self.userFrom = requset.data;
+                    self.userFrom.password = null;
                 })
                 this.userModal.el.modal('show');
             },
@@ -150,26 +154,46 @@ $(function () {
                     toastr.info("请选择记录", "提示");
                     return;
                 }
-                var ids = new Array(rows.data().length);
-                for(var i = 0 ; i < rows.data().length ; i++){
-                    ids[i] = rows.data()[i].id;
-                }
                 var self = this;
-                context.method.delete(context.config.requestHost + "/sys/user/list" ,{
-                    ids : ids
-                },function (requset) {
-                    if(requset.code == sysCode.SUCCESS){
-                        self.dataTable.ajax.reload();
-                        toastr.success("删除成功","成功");
-                    }else {
-                        toastr.error(requset.msg,"失败");
+                this.$messagebox.show({'title':'询问','describe':'您确定删除所选择数据？'},{cb:function () {
+                    var ids = new Array(rows.data().length);
+                    for(var i = 0 ; i < rows.data().length ; i++){
+                        ids[i] = rows.data()[i].id;
                     }
-                })
+                    context.method.delete(context.config.requestHost + "/sys/user/list" ,{
+                        ids : ids
+                    },function (requset) {
+                        if(requset.code == sysCode.SUCCESS){
+                            self.dataTable.ajax.reload();
+                            toastr.success("删除成功","成功");
+                        }else {
+                            toastr.error(requset.msg,"失败");
+                        }
+                    })
+                },buttonName:['取消','确定']});
+
+
             },
             //刷新
             reload:function () {
                 this.dataTable.ajax.reload();
                 toastr.success("已刷新","成功");
+            },
+            //重置密码
+            resetPassword:function () {
+                this.isEditPassword = true;
+                this.userModal.title = "修改密码";
+                var rows = this.dataTable.rows({selected:true});
+                if(rows.data().length != 1){
+                    toastr.info("请选择一条记录", "提示");
+                    return;
+                }
+                var self = this;
+                context.method.get(context.config.requestHost + "/sys/user/" + rows.data()[0].id ,function (requset) {
+                    self.userFrom = requset.data;
+                    self.userFrom.password = null;
+                })
+                this.userModal.el.modal('show');
             },
             //重置
             resetting:function () {
