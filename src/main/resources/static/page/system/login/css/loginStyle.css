@@ -5,6 +5,9 @@
  * Date: 2017/11/14
  * Time: 0:39
  */
+.login-position-app{
+    background-color: #6C6C6C;
+}
 .login-logo .login-logo-text{
     font-size: 0.4rem;
     font-weight: 800;
@@ -32,14 +35,8 @@
     text-align: center;
 
 }
-.btn{
-    width: 1.2rem;
-    height: 0.5rem;
-    color: white;
-    border: red;
-}
 .login-position-app .login-footer {
-    background-color:	#6C6C6C;
+    background-color:	#3C3C3C;
 }
 .login-position-app .login-footer .login-footer-msg{
     color: white;
@@ -51,11 +48,4 @@
 }
 .login-position-app .login-big-logo img{
     opacity:0.5
-}
-
-.btn-commit{
-    background-color: #019858;
-}
-.btn-reset{
-    background-color:		#BEBEBE;
 }

@@ -27,10 +27,12 @@ $(function () {
                     if(data.code == sysCode.SUCCESS ){
                         sessionStorage.setItem(context.tokenName ,data.data);
                         window.location.href = context.config.base + indexUrl ;
+                    }else {
+                        toastr.error("账号或密码错误","登陆失败");
                     }
 
                 },function(data){
-                    toastr.error("登录失败","失败")
+                    toastr.error("登录异常","失败")
                 });
             },
             reset:function () {
