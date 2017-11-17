@@ -49,3 +49,9 @@
 .login-position-app .login-big-logo img{
     opacity:0.5
 }
+.help-block{
+    line-height: 0.2rem;
+}
+.help-block-error{
+    color: red;
+}

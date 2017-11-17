@@ -49,6 +49,9 @@ $(function () {
                         userCode:'请输入您的编码',
                         password:'请输入您的密码'
                     },
+                    errorPlacement: function(error, element) {
+                        error.appendTo(element.parent());
+                    }
                 }).form();
             }
         }

@@ -8,8 +8,8 @@
 
 var context = {
     config:{
-        requestHost:"http://localhost:8080",
-        base:"http://localhost:10100/biggirlos",
+        requestHost:"http://127.0.0.1:8081",
+        base:"http://127.0.0.1:10100/biggirlos",
         serviceName:"/biggirlos"
     },
     url:{
