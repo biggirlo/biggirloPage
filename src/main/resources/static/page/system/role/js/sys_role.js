@@ -219,26 +219,30 @@ $(function () {
             },
             //删除
             del:function () {
+
                 var rows = this.dataTable.rows({selected:true});
                 if(rows.data().length == 0){
                     toastr.info("请选择记录", "提示");
                     return;
                 }
-                var ids = new Array(rows.data().length);
-                for(var i = 0 ; i < rows.data().length ; i++){
-                    ids[i] = rows.data()[i].id;
-                }
                 var self = this;
-                context.method.delete(self.url.baseList,{
-                    ids : ids
-                },function (requset) {
-                    if(requset.code == sysCode.SUCCESS){
-                        self.dataTable.ajax.reload();
-                        toastr.success("删除成功","成功");
-                    }else {
-                        toastr.error(requset.msg,"失败");
+                this.$messagebox.show({'title':'询问','describe':'您确定删除所选择数据？'},{cb:function () {
+                    var ids = new Array(rows.data().length);
+                    for(var i = 0 ; i < rows.data().length ; i++){
+                        ids[i] = rows.data()[i].id;
                     }
-                })
+                    context.method.delete(self.url.baseList,{
+                        ids : ids
+                    },function (requset) {
+                        if(requset.code == sysCode.SUCCESS){
+                            self.dataTable.ajax.reload();
+                            toastr.success("删除成功","成功");
+                        }else {
+                            toastr.error(requset.msg,"失败");
+                        }
+                    })
+                },buttonName:['取消','确定']});
+
             },
             //刷新
             reload:function () {

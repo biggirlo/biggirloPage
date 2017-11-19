@@ -172,7 +172,6 @@ $(function () {
                     })
                 },buttonName:['取消','确定']});
 
-
             },
             //刷新
             reload:function () {
