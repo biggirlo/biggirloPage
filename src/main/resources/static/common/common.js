@@ -139,6 +139,6 @@ var sysCode = {
  *
  * @type {{}}
  */
-var userState = {
+var webPageState = {
     isNeedSave : false,//当前页面是否需要保存,默认不需要
 }

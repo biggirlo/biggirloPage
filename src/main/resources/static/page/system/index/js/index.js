@@ -20,7 +20,7 @@ var index = {
          * @param unShowMsg 是否提示信息 默认提示
          */
         loadPage : function(url,unShowMsg){
-            userState.isNeedSave = false;
+            webPageState.isNeedSave = false;
             $.ajax({
                 url: url,
                 cache: false,

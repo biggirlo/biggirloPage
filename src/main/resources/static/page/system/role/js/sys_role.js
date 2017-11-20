@@ -162,10 +162,10 @@ $(function () {
                     }
                 }).bind("select_node.jstree",function (obj, e) {
                     // 获取当前节点
-                    userState.isNeedSave = true;
+                    webPageState.isNeedSave = true;
                 }).bind("deselect_node.jstree",function (Object, e,event) {
                     // 获取当前节点
-                    userState.isNeedSave = true;
+                    webPageState.isNeedSave = true;
                 });
             },
             add:function () {
@@ -277,7 +277,7 @@ $(function () {
                             for(var i = 0 ; i < requset.data.length ; i++){
                                 shef.tagInput.tagsinput('add', requset.data[i]);
                             }
-                            userState.isNeedSave = false;
+                            webPageState.isNeedSave = false;
                         }else {
                             toastr.success(data.msg,"成功")
                         }
@@ -308,8 +308,10 @@ $(function () {
                     roleId :this.currentRole.id,
                     userIds:userIds
                 },function (request) {
-                    if(request.code == sysCode.SUCCESS)
+                    if(request.code == sysCode.SUCCESS){
+                        webPageState.isNeedSave = false;
                         toastr.success(request.msg,"成功");
+                    }
                     else
                         toastr.error(request.msg,"失败");
                 })
@@ -351,7 +353,7 @@ $(function () {
                 },function (request) {
                     if(request.code == sysCode.SUCCESS){
                         toastr.success(request.msg,"成功");
-                        userState.isNeedSave = false;
+                        webPageState.isNeedSave = false;
                     }
                     else
                         toastr.error(request.msg,"失败");
@@ -364,10 +366,10 @@ $(function () {
             //退出视图
             outAutoUserRole:function () {
                 var shef = this;
-               if(userState.isNeedSave){
+               if(webPageState.isNeedSave){
                     //询问框
                     this.$messagebox.show({'title':'询问','describe':'您未保存数据,确定退出吗'},{cb:function () {
-                        userState.isNeedSave = false;
+                        webPageState.isNeedSave = false;
                         shef.viewCrol.userRole.class = 'col-md-12';
                         shef.viewCrol.userRole.userRoleShow = false;
                         shef.viewCrol.roleMenu.roleMenuShow = false;
@@ -392,11 +394,11 @@ $(function () {
             //视图控制器
             viewController:function (e) {
 
-                if(userState.isNeedSave){
+                if(webPageState.isNeedSave){
                     var shef = this;
                     //询问框
                     this.$messagebox.show({'title':'询问','describe':'您未保存数据,确定切换吗'},{cb:function () {
-                        userState.isNeedSave = false;
+                        webPageState.isNeedSave = false;
                         shef.viewShow(e);
                     },buttonName:['取消','确定']});
                 }else
