@@ -65,12 +65,12 @@ $(function () {
                             "responsive": false
                         },
                         'data': function (obj, callback) {
-                                var shef = this;
-                                context.method.get(sheetP.url.tree,function(result) {
-                                    var jsonarray = result.data;
-                                    callback.call(shef, jsonarray);
-                                });
-                            }
+                            var shef = this;
+                            context.method.get(sheetP.url.tree,function(result) {
+                                var jsonarray = result.data;
+                                callback.call(shef, jsonarray);
+                            });
+                        }
                     },
                     "types" : {
                         "default" : {
@@ -81,6 +81,7 @@ $(function () {
                         }
                     }
                 }).bind("activate_node.jstree", function (obj, e) {
+                    console.log(e);
                     //判断是否重复点击
                     if(sheetP.modelFrom.parentId == e.node.id)
                         return;
@@ -124,7 +125,7 @@ $(function () {
                     //服务器加载数据地址
                     "ajax":context.method.dataTableAjax( menusUrl,{
                         "parentId":this.modelFrom.parentId
-                     }),
+                    }),
                     "columns":[
                         { "data": "id" ,"title":"userId","visible": false,"name": "ID"},
                         { "data": "menuCode" ,"title":"菜单编码","name": "MENU_CODE","searchable":true},
@@ -154,12 +155,10 @@ $(function () {
                 this.dataTable.ajax.reload();
             },
             add:function () {
-                this.reSetting();
                 this.menuModal.title = "新增";
                 this.menuModal.el.modal('show');
             },
             edit:function () {
-                this.reSetting();
                 this.menuModal.title = "编辑";
                 var rows = this.dataTable.rows({selected:true});
                 if(rows.data().length != 1){
@@ -177,7 +176,6 @@ $(function () {
                 if(!this.validate())
                     return
                 var shef = this;
-                console.log(this.modelFrom);
                 context.method.post(this.url.save,this.modelFrom,function (data) {
                     if(data.code == sysCode.SUCCESS ){
                         toastr.success(data.msg,"成功");
@@ -194,13 +192,15 @@ $(function () {
             },
             //重置
             reSetting:function () {
-                this.modelFrom.id = null;
-                this.modelFrom.menuCode = null;
-                this.modelFrom.menuName = null;
-                this.modelFrom.url = null;
-                this.modelFrom.menuIcon = null;
-                this.modelFrom.type = null;
-                this.modelFrom.sort = null;
+                this. modelFrom ={
+                    id:null,
+                    menuCode:null,
+                    menuName:null,
+                    url:null,
+                    menuIcon:null,
+                    type:null,
+                    sort:null
+                }
             },
             //表单验证
             validate:function(el){
