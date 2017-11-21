@@ -5,7 +5,7 @@
   Date: 2017/9/29
   Time: 1:28
 -->
-<div id="menuApp" v-show="isShow">
+<div id="handleApp" v-show="isShow">
     <h6>
 
     </h6>
@@ -15,7 +15,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="fa fa-tree font-blue-sharp"></i>
-                        <span class="caption-subject font-blue-sharp bold uppercase">菜单树</span>
+                        <span class="caption-subject font-blue-sharp bold uppercase">操作树</span>
                     </div>
                     <div class="actions">
                         <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="刷新列表" @click="refresh">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div id="menuTree" class="tree-demo">
+                    <div id="handleTree" class="tree-demo">
                     </div>
                 </div>
             </div>
@@ -35,16 +35,16 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="fa fa-birthday-cake font-blue-sharp"></i>
-                        <span class="caption-subject font-blue-sharp bold uppercase">菜单列表</span>
+                        <span class="caption-subject font-blue-sharp bold uppercase">操作列表</span>
                     </div>
                     <div class="actions">
-                        <button class="btn btn-circle btn-icon-only btn-default btn-red" href="javascript:;" title="新增菜单" @click="add">
+                        <button class="btn btn-circle btn-icon-only btn-default btn-red" href="javascript:;" title="新增操作" @click="add">
                             <i class="fa fa-plus font-blue-sharp"></i>
                         </button>
-                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="删除菜单" @click="del">
+                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="删除操作" @click="del">
                             <i class="fa fa-remove font-red-mint"></i>
                         </a>
-                        <button class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="编辑用户" @click="edit">
+                        <button class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="编辑操作" @click="edit">
                             <i class="fa fa-pencil-square-o font-blue-sharp"></i>
                         </button>
                         <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="刷新列表" @click="reload">
@@ -64,38 +64,25 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="fa fa-birthday-cake font-blue-sharp"></i>
-                        <span class="caption-subject font-blue-sharp bold uppercase">菜单详情</span>
-                    </div>
-                    <div class="actions">
-                        <button class="btn btn-circle btn-icon-only btn-default btn-red" href="javascript:;" title="新增菜单" @click="add">
-                            <i class="fa fa-plus font-blue-sharp"></i>
-                        </button>
+                        <span class="caption-subject font-blue-sharp bold uppercase">操作详情</span>
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div class="row static-info">
-                        <div class="col-md-3 name"> 菜单编码</div>
-                        <div class="col-md-8 value">{{modelInfo.menuCode}}</div>
+                        <div class="col-md-3 name"> 操作编码</div>
+                        <div class="col-md-8 value">{{modelInfo.handleCode}}</div>
                     </div>
                     <div class="row static-info">
-                        <div class="col-md-3 name"> 菜单名称</div>
-                        <div class="col-md-8 value">{{modelInfo.menuName}}</div>
+                        <div class="col-md-3 name"> 操作名称</div>
+                        <div class="col-md-8 value">{{modelInfo.name}}</div>
                     </div>
                     <div class="row static-info">
                         <div class="col-md-3 name"> 访问路径</div>
                         <div class="col-md-8 value">{{modelInfo.url}}</div>
                     </div>
                     <div class="row static-info">
-                        <div class="col-md-3 name"> 菜单icon</div>
-                        <div class="col-md-8 value">
-                            <i :class="modelInfo.menuIcon" class="font-blue-sharp"></i>
-                            &nbsp;
-                            {{modelInfo.menuIcon}}
-                        </div>
-                    </div>
-                    <div class="row static-info">
-                        <div class="col-md-3 name"> 菜单类型</div>
-                        <div class="col-md-8 value">{{modelInfo.typeName}}</div>
+                        <div class="col-md-3 name"> 是否启用</div>
+                        <div class="col-md-8 value">{{modelInfo.isAvailableName}}</div>
                     </div>
                 </div>
             </div>
@@ -126,18 +113,18 @@
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-plug font-blue-sharp"></i>
                                                 </span>
-                                                <input type="text" id="menuCode" name="menuCode" class="form-control" placeholder="请输入菜单编码..." v-model="modelFrom.menuCode">
+                                                <input type="text" id="handleCode" name="handleCode" class="form-control" placeholder="请输入操作编码..." v-model="modelFrom.handleCode">
                                             </div>
                                         </div>
                                     </div>
-                                    <label class="col-md-2 control-label">菜单名字</label>
+                                    <label class="col-md-2 control-label">操作名称</label>
                                     <div class="col-md-4">
                                         <div class="input-inline">
                                             <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-bookmark-o font-blue-sharp"></i>
                                             </span>
-                                                <input type="tel" id="menuName" name="menuName" class="form-control" placeholder="请输入菜单名字..." v-model="modelFrom.menuName">
+                                                <input type="tel" id="name" name="name" class="form-control" placeholder="请输入操作名称..." v-model="modelFrom.name">
                                             </div>
                                         </div>
                                     </div>
@@ -154,46 +141,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <label class="col-md-2 control-label">菜单图标</label>
-                                    <div class="col-md-4">
-                                        <div class="input-inline">
-                                            <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-mail-forward font-blue-sharp"></i>
-                                            </span>
-                                                <input type="text" id="menuIcon" name="menuIcon" class="form-control" placeholder="请输入菜单名字..." v-model="modelFrom.menuIcon">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">排序</label>
-                                    <div class="col-md-4">
-                                        <div class="input-inline">
-                                            <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-sort font-blue-sharp"></i>
-                                            </span>
-                                                <input type="number" id="sort" name="sort" class="form-control" placeholder="请输入排序..." v-model="modelFrom.sort">
-                                            </div>
-                                        </div>
-                                    </div>
                                     <label class="col-md-2 control-label" >类型</label>
                                     <div class="col-md-4">
                                         <div class="md-radio-inline">
                                             <div class="md-radio">
-                                                <input type="radio" id="type1" name="type" value="1" class="md-radiobtn" v-model="modelFrom.type" value="1">
+                                                <input type="radio" id="type1" name="isAvailable" value="1" class="md-radiobtn" v-model="modelFrom.isAvailable" value=0>
                                                 <label for="type1">
                                                     <span></span>
                                                     <span class="check"></span>
-                                                    <span class="box"></span>菜单</label>
+                                                    <span class="box"></span>启用</label>
                                             </div>
                                             <div class="md-radio">
-                                                <input type="radio" id="type2" name="type" value="2" class="md-radiobtn" v-model="modelFrom.type" value=2>
+                                                <input type="radio" id="type2" name="isAvailable" value="2" class="md-radiobtn" v-model="modelFrom.isAvailable" value=1>
                                                 <label for="type2">
                                                     <span></span>
                                                     <span class="check"></span>
-                                                    <span class="box"></span> 接口</label>
+                                                    <span class="box"></span> 停用</label>
                                             </div>
                                         </div>
                                     </div>

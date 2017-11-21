@@ -7,31 +7,30 @@
  */
 $(function () {
     var vm = new Vue({
-        el: "#menuApp",
+        el: "#handleApp",
         data:{
             isShow: false ,//隐藏或者现实列表
             tree:null,//树代理对象
             dataTable:null,//dataTable代理对象
             url:{
                 tree: context.config.requestHost + '/sys/handle/jsTree',
-                menus:context.config.requestHost + '/sys/menu/dataTable/list',
-                base:context.config.requestHost + '/sys/menu/',
-                save:context.config.requestHost + '/sys/menu/info',
-                baselist:context.config.requestHost + "/sys/menu/list"
+                menus:context.config.requestHost + '/sys/handle/dataTable/list',
+                base:context.config.requestHost + '/sys/handle/',
+                save:context.config.requestHost + '/sys/handle/info',
+                baselist:context.config.requestHost + "/sys/handle/list"
             },
             menuModal:{
                 el:'#editModal',
-                title:"新增菜单"
+                title:"新增操作"
             },
             modelFrom:{
-                id:null,
-                menuCode:null,
-                menuName:null,
+                id: null,
+                menuId :0,
+                handleCode:null,
+                name:null,
                 url:null,
-                menuIcon:null,
                 type:null,
-                sort:null,
-                parentId:0, //父级id 默认为0
+                isAvailable:null
             },
             //详情
             modelInfo:{},
@@ -46,10 +45,7 @@ $(function () {
             //初始化dataTables
             this.dataTablesInit();
             var shef = this
-            this.menuModal.el = $("#editModal").on('hidden.bs.modal', function () {
-                // 执行一些动作...
-                shef.reSetting();
-            });;
+            this.menuModal.el = $("#editModal");
         },
         methods:{
             /**
@@ -58,7 +54,7 @@ $(function () {
             treeInit:function () {
                 //请求路径
                 var sheetP = this;
-                this.tree = $('#menuTree').jstree({
+                this.tree = $('#handleTree').jstree({
                     'plugins': [ "types"],
                     'core': {
                         "themes" : {
@@ -82,29 +78,30 @@ $(function () {
                     }
                 }).bind("activate_node.jstree", function (obj, e) {
                     //判断是否重复点击
-                    if(sheetP.modelFrom.parentId == e.node.id)
+                    if(sheetP.modelFrom.menuId == e.node.id)
                         return;
 
                     // 获取当前节点
-                    sheetP.modelFrom.parentId = e.node.id;
+                    sheetP.modelFrom.menuId = e.node.id;
 
-                    //判断是否是子节点
-                    if(e.node.children.length == 0){//详情
+                    //判断是否是子节点且是操作节点
+                    if(e.node.children.length == 0 && e.node.data && e.node.data.type == 'HANDLE'){//详情
+
                         sheetP.isDataTableView = false ;
                         //重置数据模型
                         sheetP.reSetting;
-                        context.method.get(sheetP.url.base+ sheetP.modelFrom.parentId ,function (requset) {
+                        context.method.get(sheetP.url.base+ sheetP.modelFrom.menuId.substr(1,sheetP.modelFrom.menuId.length) ,function (requset) {
                             sheetP.modelInfo = requset.data;
-                            if(sheetP.modelInfo.type == 1)
-                                sheetP.modelInfo.typeName = '菜单';
+                            if(sheetP.modelInfo.isAvailable == 0)
+                                sheetP.modelInfo.isAvailableName = '启用';
                             else
-                                sheetP.modelInfo.typeName = '接口';
-                            toastr.success('已加载"'+ sheetP.modelInfo.menuName +'"菜单详情',"成功");
+                                sheetP.modelInfo.isAvailableName = '停用';
+                            toastr.success('已加载"'+ sheetP.modelInfo.name +'"操作详情',"成功");
                         })
                     }else{
                         //刷新datatable
                         sheetP.dataTable.settings()[0].ajax.data = {
-                            "parentId":sheetP.modelFrom.parentId
+                            "menuId":sheetP.modelFrom.menuId
                         };
                         sheetP.dataTable.ajax.reload();
                         sheetP.isDataTableView = true ;
@@ -123,18 +120,19 @@ $(function () {
                     "searching": false,
                     //服务器加载数据地址
                     "ajax":context.method.dataTableAjax( menusUrl,{
-                        "parentId":this.modelFrom.parentId
+                        "menuId":this.modelFrom.menuId
                     }),
                     "columns":[
                         { "data": "id" ,"title":"userId","visible": false,"name": "ID"},
-                        { "data": "menuCode" ,"title":"菜单编码","name": "MENU_CODE","searchable":true},
-                        { "data": "menuName" ,"title":"菜单名称","name": "MENU_NAME","searchable":false},
-                        { "data": "type" ,"title":"类型","name": "TYPE","searchable":false,
+                        { "data": "handleCode" ,"title":"操作编码","name": "HANDLE_CODE","searchable":true},
+                        { "data": "name" ,"title":"操作名称","name": "NAME","searchable":false},
+                        { "data": "url" ,"title":"请求路径","name": "URL","searchable":false},
+                        { "data": "isAvailable" ,"title":"类型","name": "IS_AVAILABLE","searchable":false,
                             render: function(data, type, row, meta) {
-                                if (data === 1) {
-                                    return '<span class="label label-sm label-success"> 菜单 </span>';
+                                if (data === 0) {
+                                    return '<span class="label label-sm label-success"> 启用 </span>';
                                 } else {
-                                    return '<span class="label label-sm btn-danger"> 接口 </span>';
+                                    return '<span class="label label-sm btn-danger"> 停用 </span>';
                                 }
                             }
                         },
@@ -154,10 +152,12 @@ $(function () {
                 this.dataTable.ajax.reload();
             },
             add:function () {
+                this.reSetting()
                 this.menuModal.title = "新增";
                 this.menuModal.el.modal('show');
             },
             edit:function () {
+                this.reSetting();
                 this.menuModal.title = "编辑";
                 var rows = this.dataTable.rows({selected:true});
                 if(rows.data().length != 1){
@@ -191,15 +191,12 @@ $(function () {
             },
             //重置
             reSetting:function () {
-                this. modelFrom ={
-                    id:null,
-                    menuCode:null,
-                    menuName:null,
-                    url:null,
-                    menuIcon:null,
-                    type:null,
-                    sort:null
-                }
+                this. modelFrom.id = null;
+                this. modelFrom.handleCode = null;
+                this. modelFrom.name = null;
+                this. modelFrom.url = null;
+                this. modelFrom.type = null;
+                this. modelFrom.isAvailable = null;
             },
             //表单验证
             validate:function(el){
