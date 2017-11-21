@@ -13,7 +13,7 @@ $(function () {
             tree:null,//树代理对象
             dataTable:null,//dataTable代理对象
             url:{
-                tree: context.config.requestHost + '/sys/menu/wholeTree',
+                tree: context.config.requestHost + '/sys/handle/jsTree',
                 menus:context.config.requestHost + '/sys/menu/dataTable/list',
                 base:context.config.requestHost + '/sys/menu/',
                 save:context.config.requestHost + '/sys/menu/info',
@@ -81,7 +81,6 @@ $(function () {
                         }
                     }
                 }).bind("activate_node.jstree", function (obj, e) {
-                    console.log(e);
                     //判断是否重复点击
                     if(sheetP.modelFrom.parentId == e.node.id)
                         return;

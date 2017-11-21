@@ -8,14 +8,16 @@
 
 var context = {
     config:{
-        requestHost:"http://127.0.0.1:8081",
-        base:"http://127.0.0.1:10100/biggirlos",
+        hostPort:"http://127.0.0.1:10100",//项目地址
+        requestHost:"http://127.0.0.1:8081", //请求地址
+        base:context.config.hostPort + context.config.serviceName,
         serviceName:"/biggirlos"
     },
     url:{
        login:  '/page/system/login/login.html'
     },
     tokenName:"Authorization",//token名称
+    hostPortName:"XForwardedFor",//请求地址名称
     method:{
         get:function (url,success,error) {
             if(!error){
@@ -28,6 +30,7 @@ var context = {
                 type:'GET', //GET
                 beforeSend: function(request) {
                     request.setRequestHeader(context.tokenName, sessionStorage.getItem(context.tokenName));
+                    request.setRequestHeader(context.hostPortName, context.config.hostPort);
                 },
                 success:function (data) {
                     if(data.code == sysCode.UN_LOGIN)
@@ -49,6 +52,7 @@ var context = {
                 type:'POST', //GET
                 beforeSend: function(request) {
                     request.setRequestHeader(context.tokenName, sessionStorage.getItem(context.tokenName));
+                    request.setRequestHeader(context.hostPortName, context.config.hostPort);
                 },
                 contentType:  "application/json; charset=utf-8",
                 data:JSON.stringify(json),
@@ -73,6 +77,7 @@ var context = {
                 type:'DELETE', //GET
                 beforeSend: function(request) {
                     request.setRequestHeader(context.tokenName, sessionStorage.getItem(context.tokenName));
+                    request.setRequestHeader(context.hostPortName, context.config.hostPort);
                 },
                 contentType:  "application/json; charset=utf-8",
                 data:JSON.stringify(json),
@@ -99,6 +104,7 @@ var context = {
                 dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text,
                 beforeSend: function(request) {
                     request.setRequestHeader(context.tokenName, sessionStorage.getItem(context.tokenName));
+                    request.setRequestHeader(context.hostPortName, context.config.hostPort);
                 },
                 success:function (data) {
                     if(data.code == sysCode.UN_LOGIN)
