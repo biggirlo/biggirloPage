@@ -148,6 +148,11 @@ $(function () {
                             var shef = this;
                             context.method.get(sheetP.url.tree + sheetP.currentRole.id,function(result) {
                                 var jsonarray = result.data;
+                                for(var i = 0; i < jsonarray.length; i++){
+                                    if(jsonarray[i].data && jsonarray[i].data.type == "HANDLE"){
+                                        jsonarray[i].id = "-" + jsonarray[i].id;
+                                    }
+                                }
                                 callback.call(shef, jsonarray);
                             });
                         }
@@ -320,14 +325,21 @@ $(function () {
             saveRoleMenu:function () {
                 var ref = this.tree.jstree(true);//获得整个树
                 var nodeIds = ref.get_selected();
-                //所有的数组
+                //所有的菜单数组
                 var allNodeIds = new Array();
-                allNodeIds = allNodeIds.concat(nodeIds);
+                //所有的操作数组
+                var allHandleIds = new Array();
+                //allNodeIds = allNodeIds.concat(nodeIds);
                 for(var i=0 ; i < nodeIds.length ;i++){
-                    var node = ref.get_node(nodeIds[i]);
+                    var nodeId = nodeIds[i];
+                    var node = ref.get_node(nodeId);
                     //console.log(node.parents);
                     if(node.children.length == 0);{
                         allNodeIds =allNodeIds.concat(node.parents);
+                        if(node.data && node.data.type == "HANDLE")//操作节点
+                            allHandleIds.push(nodeId.substr(1,nodeId.length));
+                        else //非操作节点
+                            allNodeIds.push(nodeId);
                     }
                 }
                 //去重
@@ -349,7 +361,8 @@ $(function () {
                 //保存
                 context.method.post(this.url.saveRoleMenu,{
                     roleId :this.currentRole.id,
-                    menuIds:allNodeIds
+                    menuIds:allNodeIds,
+                    handleIds:allHandleIds
                 },function (request) {
                     if(request.code == sysCode.SUCCESS){
                         toastr.success(request.msg,"成功");

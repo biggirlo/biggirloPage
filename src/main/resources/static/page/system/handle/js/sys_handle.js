@@ -64,6 +64,12 @@ $(function () {
                             var shef = this;
                             context.method.get(sheetP.url.tree,function(result) {
                                 var jsonarray = result.data;
+                                //修改id,避免冲突
+                                for (var i = 0; i < jsonarray.length; i++) {
+                                    if (jsonarray[i].data && jsonarray[i].data.type == "HANDLE"){
+                                            jsonarray[i].id = "-" + jsonarray[i].id;
+                                        }
+                                 }
                                 callback.call(shef, jsonarray);
                             });
                         }
@@ -87,15 +93,15 @@ $(function () {
                     //判断是否是子节点且是操作节点
                     if(e.node.children.length == 0 && e.node.data && e.node.data.type == 'HANDLE'){//详情
 
-                        sheetP.isDataTableView = false ;
                         //重置数据模型
                         sheetP.reSetting;
                         context.method.get(sheetP.url.base+ sheetP.modelFrom.menuId.substr(1,sheetP.modelFrom.menuId.length) ,function (requset) {
                             sheetP.modelInfo = requset.data;
-                            if(sheetP.modelInfo.isAvailable == 0)
+                            if(sheetP.modelInfo.isAvailable == 1)
                                 sheetP.modelInfo.isAvailableName = '启用';
                             else
                                 sheetP.modelInfo.isAvailableName = '停用';
+                            sheetP.isDataTableView = false ;
                             toastr.success('已加载"'+ sheetP.modelInfo.name +'"操作详情',"成功");
                         })
                     }else{
@@ -129,7 +135,7 @@ $(function () {
                         { "data": "url" ,"title":"请求路径","name": "URL","searchable":false},
                         { "data": "isAvailable" ,"title":"类型","name": "IS_AVAILABLE","searchable":false,
                             render: function(data, type, row, meta) {
-                                if (data === 0) {
+                                if (data === 1) {
                                     return '<span class="label label-sm label-success"> 启用 </span>';
                                 } else {
                                     return '<span class="label label-sm btn-danger"> 停用 </span>';

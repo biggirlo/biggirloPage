@@ -90,7 +90,6 @@ $(function () {
 
                     //判断是否是子节点
                     if(e.node.children.length == 0){//详情
-                        sheetP.isDataTableView = false ;
                         //重置数据模型
                         sheetP.reSetting;
                         context.method.get(sheetP.url.base+ sheetP.modelFrom.parentId ,function (requset) {
@@ -99,6 +98,7 @@ $(function () {
                                 sheetP.modelInfo.typeName = '菜单';
                             else
                                 sheetP.modelInfo.typeName = '接口';
+                            sheetP.isDataTableView = false ;
                             toastr.success('已加载"'+ sheetP.modelInfo.menuName +'"菜单详情',"成功");
                         })
                     }else{
