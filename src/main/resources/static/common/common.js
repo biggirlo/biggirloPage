@@ -9,7 +9,7 @@
 var context = {
     config:{
         hostPort:"http://127.0.0.1:10100",//项目地址
-        requestHost:"http://127.0.0.1:8081", //请求地址
+        requestHost:"http://127.0.0.1:8081/biggirlos", //请求地址
         serviceName:"/biggirlos",
         base:"http://127.0.0.1:10100/biggirlos",
     },
