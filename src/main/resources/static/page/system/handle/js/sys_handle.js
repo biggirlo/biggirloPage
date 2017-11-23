@@ -133,6 +133,7 @@ $(function () {
                         { "data": "handleCode" ,"title":"操作编码","name": "HANDLE_CODE","searchable":true},
                         { "data": "name" ,"title":"操作名称","name": "NAME","searchable":false},
                         { "data": "url" ,"title":"请求路径","name": "URL","searchable":false},
+                        { "data": "type" ,"title":"方法类型","name": "TYPE","searchable":false},
                         { "data": "isAvailable" ,"title":"类型","name": "IS_AVAILABLE","searchable":false,
                             render: function(data, type, row, meta) {
                                 if (data === 1) {
@@ -208,15 +209,16 @@ $(function () {
             validate:function(el){
                 return $("#modelFrom").validate({
                     rules:{
-                        menuCode:'required',
-                        menuName:'required',
+                        handleCode:'required',
+                        name:'required',
                         type:'required',
-
+                        isAvailable:'required'
                     },
                     messages:{
-                        menuCode:'请输入菜单编码',
-                        menuName:'请输入菜单名字',
-                        type:'请选择菜单类型',
+                        handleCode:'请输入操作编码',
+                        name:'请输入操作名称',
+                        type:'请输入方法类型',
+                        isAvailable:"请选择请用类型"
                     },
                 }).form();
             },

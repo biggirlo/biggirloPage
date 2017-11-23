@@ -81,6 +81,10 @@
                         <div class="col-md-8 value">{{modelInfo.url}}</div>
                     </div>
                     <div class="row static-info">
+                        <div class="col-md-3 name"> 方法类型</div>
+                        <div class="col-md-8 value">{{modelInfo.type}}</div>
+                    </div>
+                    <div class="row static-info">
                         <div class="col-md-3 name"> 是否启用</div>
                         <div class="col-md-8 value">{{modelInfo.isAvailableName}}</div>
                     </div>
@@ -141,7 +145,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <label class="col-md-2 control-label" >类型</label>
+                                    <label class="col-md-2 control-label" >方法类型</label>
+                                    <div class="col-md-4">
+                                        <div class="input-inline">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-user font-blue-sharp"></i>
+                                                </span>
+                                                <input type="text" id="type" name="type" class="form-control" placeholder="请输入方法类型..." v-model="modelFrom.type">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" >是否启用</label>
                                     <div class="col-md-4">
                                         <div class="md-radio-inline">
                                             <div class="md-radio">
