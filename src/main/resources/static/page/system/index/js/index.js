@@ -4,7 +4,8 @@ $(function () {
 var index = {
     url:{
         menus:'/sys/menu/tree',
-        error404:''
+        error404:'',
+        logout:'/logout'
     },
     //初始化
     init:function(){
@@ -129,6 +130,17 @@ var index = {
                 }
             }
             return html;
+        },
+        /**
+         * 退出登录
+         */
+        logout:function () {
+            context.method.put(context.config.requestHost + index.url.logout,{},function (data) {
+                if(data.code == sysCode.SUCCESS)
+                    window.location.href = context.config.serviceName + context.url.login;
+                else
+                    toastr.error("退出失败",'失败');
+            })
         }
     }
 }

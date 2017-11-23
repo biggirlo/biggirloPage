@@ -33,10 +33,7 @@ var context = {
                     request.setRequestHeader(context.hostPortName, context.config.hostPort);
                 },
                 success:function (data) {
-                    if(data.code == sysCode.UN_LOGIN)
-                        window.location.href = context.config.serviceName + context.url.login;
-                    else
-                        success(data);
+                    context.ajaxSuccess(data,success);
                 },
                 error:error
             })
@@ -58,10 +55,7 @@ var context = {
                 data:JSON.stringify(json),
                 dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text,
                 success:function (data) {
-                    if(data.code == sysCode.UN_LOGIN)
-                        window.location.href = context.config.serviceName +  context.url.login;
-                    else
-                        success(data);
+                    context.ajaxSuccess(data,success);
                 },
                 error:error
             })
@@ -83,10 +77,7 @@ var context = {
                 data:JSON.stringify(json),
                 dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text,
                 success:function (data) {
-                    if(data.code == sysCode.UN_LOGIN)
-                        window.location.href = context.config.serviceName +  context.url.login;
-                    else
-                        success(data);
+                    context.ajaxSuccess(data,success);
                 },
                 error:error
             })
@@ -107,10 +98,7 @@ var context = {
                     request.setRequestHeader(context.hostPortName, context.config.hostPort);
                 },
                 success:function (data) {
-                    if(data.code == sysCode.UN_LOGIN)
-                        window.location.href = context.config.serviceName + context.url.login;
-                    else
-                        success(data);
+                    context.ajaxSuccess(data,success);
                 },
                 error:error
             })
@@ -125,6 +113,19 @@ var context = {
                }
            };
         }
+    },
+    /**
+     * ajax请求成功处理函数
+     * @param data
+     * @param success
+     */
+    ajaxSuccess:function (data,success) {
+        if(data.code == sysCode.UN_LOGIN)
+            window.location.href = context.config.serviceName + context.url.login;
+        else if(data.code == sysCode.FORBIDDEN){
+            toastr.error("您目前无权限操作","错误")
+        } else
+            success(data);
     }
 }
 
@@ -138,7 +139,8 @@ var sysCode = {
     SYSTEM_ERROR:10001,//系统错误
     UN_LOGIN:10002,//未登陆
     LOGIN_ERROR_UN_EXIST_NAME_PASSWORD:10003,//用户名或者密码为空
-    LOGIN_ERROR_FALIE_NAME_PASSWORD:10004.//用户名或者密码错误
+    LOGIN_ERROR_FALIE_NAME_PASSWORD:10004,//用户名或者密码错误
+    FORBIDDEN:10403//用户无操作权限访问
 }
 
 /**
