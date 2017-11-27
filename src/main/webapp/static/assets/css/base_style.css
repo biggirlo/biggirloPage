@@ -1,0 +1,52 @@
+.active2 a {
+    background: #36c6d3;
+    border-top-color: transparent !important;
+}
+.active2>a,.active2>a>i,.active2>span{
+    color: #fff!important;
+}
+.active2>a:hover,.active2>a:focus{
+     background: #36c6d3!important;
+ }
+
+.open>a{
+    background: #36c6d3!important;
+}
+
+/**datatables 自定义样式*/
+.dataTables_wrapper .dataTables_filter,.dataTables_wrapper .paging_bootstrap_number{
+    text-align: right;
+}
+.dataTables_wrapper{
+    position: relative;
+}
+.dataTables_wrapper .dataTables_processing{
+    margin: auto!important;
+    left: 0;
+    right: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 40px;
+}
+.dataTables_wrapper .selected{
+    background:#36c6d3!important ;
+}
+
+.modal-backdrop{
+    z-index: 10049!important;
+}
+.page-404 .number{
+    font-size: 50px;
+}
+.body-post{
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+.index-system-title{
+    color: white;
+    line-height: 45px;
+    font-weight: 800;
+    font-size: 22px;
+}

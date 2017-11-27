@@ -1,0 +1,88 @@
+/**
+ * 该项目仅供学习
+ *  如有疑问或建议请致邮箱：645614025@qq.com
+ * Created by 王雁欣
+ * Date: 2017/11/13
+ * Time: 21:11
+ */
+.login-position-app{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.login-position-app .login-logo{
+    height: 84%;
+    position: relative;
+}
+.login-position-app .login-logo .login-logo-img{
+    height:100%;
+    position:absolute;
+    margin: auto;
+    top: 1rem;
+    left:1rem;
+}
+.login-position-app .login-logo .login-logo-img img{
+    height: 1rem;
+}
+.login-position-app .login-logo .login-logo-text{
+    height:100%;
+    position:absolute;
+    margin: auto;
+    top: 1rem;
+    left:2.3rem;
+    padding-top: 0.3rem;
+}
+/**
+    表单部分
+ */
+.login-position-app .login-logo .login-from{
+    height: 6rem;
+    width: 6rem;
+    position: absolute;
+    margin:auto;
+    top:1rem;
+    bottom: 0;
+    right: 3.5rem;
+    padding: 0 0.6rem 0 0.6rem;
+}
+
+.login-position-app .login-logo .login-from .login-from-title{
+    text-align: center;
+    padding-top: 0.5rem;
+}
+.login-position-app .login-logo .login-from-input{
+    line-height: 30px;
+    height: 1.5rem;
+}
+.login-position-app .login-logo .login-from-input input{
+    width: 100%;
+    height: 0.7rem;
+}
+
+.login-position-app .login-footer{
+    height:16%;
+    padding: 0 4rem 0 4rem;
+}
+.login-position-app .login-footer .login-footer-msg{
+    float: left;
+    width: 33.33%;
+    padding-top: 0.5rem;
+}
+.login-position-app .login-big-logo{
+    height: 6rem;
+    width: 7.5rem;
+    position: absolute;
+    margin: auto;
+    top: 1rem;
+    bottom: 0;
+    left: 0rem;
+    right: 8.8rem;
+}
+.login-position-app .login-big-logo img{
+    height:100%;
+}
+
+.splace-1{
+    height: 0.6rem;
+}

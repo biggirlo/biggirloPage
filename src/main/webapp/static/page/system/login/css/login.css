@@ -1,0 +1,42 @@
+@media only screen and (min-width: 401px){
+    html {
+        font-size: 21px !important;
+    }
+}
+@media only screen and (min-width: 428px){
+    html {
+        font-size: 26px !important;
+    }
+}
+@media only screen and (min-width: 481px){
+    html {
+        font-size: 30px !important;
+    }
+}
+@media only screen and (min-width: 569px){
+    html {
+        font-size: 35px !important;
+    }
+}
+@media only screen and (min-width: 641px){
+    html {
+        font-size: 40px !important;
+    }
+}
+@media only screen and (min-width: 1080px){
+    html {
+        font-size: 60px !important;
+    }
+}
+
+@media only screen and (min-width: 1440px){
+    html {
+        font-size: 70px !important;
+    }
+}
+
+html,body{
+    padding: 0;
+    margin: 0;
+    height:100%;
+}

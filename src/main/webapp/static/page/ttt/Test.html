@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+<body>
+<button type="button" onclick="show()">点击我</button>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/layer/layer.js"></script>
+
+<script type="text/javascript">
+    var show= function () {
+        //询问框
+        layer.confirm('我是一个询问框？', {
+            btn: ['按钮1','按钮1'] //按钮
+        }, function(){
+            alert("我是按钮1对应的事件");
+        }, function(){
+            alert("我是按钮2对应的事件");
+        });
+    }
+</script>
+</html>

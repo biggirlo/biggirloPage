@@ -1,0 +1,57 @@
+/**
+ * 该项目仅供学习
+ *  如有疑问或建议请致邮箱：645614025@qq.com
+ * Created by 王雁欣
+ * Date: 2017/11/14
+ * Time: 0:39
+ */
+.login-position-app{
+    background-color: #6C6C6C;
+}
+.login-logo .login-logo-text{
+    font-size: 0.4rem;
+    font-weight: 800;
+    color: white;
+}
+.login-logo .login-from{
+    background-color: white;
+}
+.login-logo .login-from .login-from-title{
+    color:#6C6C6C;
+    font-size: 0.4rem;
+    font-weight: 800;
+}
+.login-logo .login-from .login-from-input .login-input-name{
+    font-size: 0.24rem;
+    color:#6C6C6C;
+}
+.login-logo .login-from .login-from-input input{
+    font-size: 0.23rem;
+    text-indent: 0.1rem;
+}
+
+.login-logo .login-from .login-from-btn{
+    line-height: 0.5rem;
+    text-align: center;
+
+}
+.login-position-app .login-footer {
+    background-color:	#3C3C3C;
+}
+.login-position-app .login-footer .login-footer-msg{
+    color: white;
+    font-size: 0.18rem;
+    line-height: 0.35rem;
+}
+.login-position-app .login-footer .login-footer-msg .footer-msg-title{
+    font-size: 0.23rem;
+}
+.login-position-app .login-big-logo img{
+    opacity:0.5
+}
+.help-block{
+    line-height: 0.2rem;
+}
+.help-block-error{
+    color: red;
+}
