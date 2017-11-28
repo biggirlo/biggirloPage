@@ -8,7 +8,7 @@ $(function () {
             },
             url:{
                 login:context.config.requestHost + '/system/login',
-                index : '/',
+                index : '../index/',
             }
         },
         mounted:function () {
@@ -26,7 +26,7 @@ $(function () {
                 context.method.post(this.url.login,this.userForm,function (data) {
                     if(data.code == sysCode.SUCCESS ){
                         sessionStorage.setItem(context.tokenName ,data.data);
-                        window.location.href = context.config.base + indexUrl ;
+                        window.location.href =  indexUrl ;
                     }else {
                         toastr.error("账号或密码错误","登陆失败");
                     }

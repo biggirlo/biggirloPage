@@ -8,13 +8,11 @@
 
 var context = {
     config:{
-        hostPort:"http://127.0.0.1:10100",//项目地址
-        requestHost:"http://127.0.0.1:8081/manage", //请求地址
-        serviceName:"/biggirlos",
-        base:"http://127.0.0.1:10100/biggirlos",
+        hostPort:"http://localhost:8080",//项目地址
+        requestHost:"http://127.0.0.1:8081/base", //请求地址
     },
     url:{
-       login:  '/page/system/login/login.html'
+       login:  '../../../page/system/login/login.html'
     },
     tokenName:"Authorization",//token名称
     hostPortName:"XForwardedFor",//请求地址名称
@@ -115,7 +113,7 @@ var context = {
     ajaxSuccess:function (data,success) {
         $('.demo-loading-btn').button('reset');
         if(data.code == sysCode.UN_LOGIN)
-            window.location.href = context.config.serviceName + context.url.login;
+            window.location.href = context.url.login;
         else if(data.code == sysCode.FORBIDDEN){
             toastr.error("您目前无权限操作","错误")
         } else

@@ -33,7 +33,7 @@ var index = {
                     if(paths){
                         var pathArray = paths.split(",");
                         for(var i = 0 ; i < pathArray.length ; i++){
-                            index.method.loadScript(context.config.serviceName + pathArray[i]);
+                            index.method.loadScript(pathArray[i]);
                         }
                     }
                     if(!unShowMsg)
@@ -42,7 +42,7 @@ var index = {
                 error:function(jqXHR, textStatus, errorThrown) {
                     if((!url ||  jqXHR.status == 404 || jqXHR.status  == 0) && index.method.isNextLoad404Page()) {
                         toastr.error("找不到指定页面！","失败");
-                        index.method.loadPage(context.config.serviceName +"/page/error/404.html",true);
+                        index.method.loadPage("/page/error/404.html",true);
                     }else
                         toastr.error("加载失败！","失败");
                 }
@@ -101,7 +101,7 @@ var index = {
                     }
                     heardHtml = '<i class="fa fa-home"></i>' + heardHtml;
                     $("#page-breadcrumb").html(heardHtml);
-                   index.method.loadPage(context.config.serviceName + $(this).attr("urlpage"));
+                   index.method.loadPage($(this).attr("urlpage"));
                 }
             })
         },
@@ -137,7 +137,7 @@ var index = {
         logout:function () {
             context.method.put(context.config.requestHost + index.url.logout,{},function (data) {
                 if(data.code == sysCode.SUCCESS)
-                    window.location.href = context.config.serviceName + context.url.login;
+                    window.location.href = context.url.login;
                 else
                     toastr.error("退出失败",'失败');
             })
