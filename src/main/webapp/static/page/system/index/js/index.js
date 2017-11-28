@@ -42,7 +42,7 @@ var index = {
                 error:function(jqXHR, textStatus, errorThrown) {
                     if((!url ||  jqXHR.status == 404 || jqXHR.status  == 0) && index.method.isNextLoad404Page()) {
                         toastr.error("找不到指定页面！","失败");
-                        index.method.loadPage("/page/error/404.html",true);
+                        index.method.loadPage("../../error/404.html",true);
                     }else
                         toastr.error("加载失败！","失败");
                 }
