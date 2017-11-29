@@ -299,7 +299,6 @@ $(function () {
                     for(var rowsIndex=0;rowsIndex<rows.data().length; rowsIndex++){
                         this.tagInput.tagsinput('add',{'userId':rows.data()[rowsIndex].id,'name':rows.data()[rowsIndex].name});
                     }
-
                 }
             },
             //保存分配的用户

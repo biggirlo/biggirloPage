@@ -49,7 +49,7 @@ $(function () {
             this.menuModal.el = $("#editModal").on('hidden.bs.modal', function () {
                 // 执行一些动作...
                 shef.reSetting();
-            });;
+            });
         },
         methods:{
             /**
@@ -177,7 +177,6 @@ $(function () {
                 if(!this.validate())
                     return
                 var shef = this;
-                console.log(this.modelFrom);
                 context.method.post(this.url.save,this.modelFrom,function (data) {
                     if(data.code == sysCode.SUCCESS ){
                         toastr.success(data.msg,"成功");
@@ -227,9 +226,11 @@ $(function () {
                 }
                 var self = this;
                 this.$messagebox.show({'title':'询问','describe':'您确定删除所选择数据？'},{cb:function () {
-                    var ids = new Array(rows.data().length);
+                    var ids = new Array();
                     for(var i = 0 ; i < rows.data().length ; i++){
-                        ids[i] = rows.data()[i].id;
+                        ids.push(rows.data()[i].id);
+                        var node = self.tree.jstree("get_node",rows.data()[i].id);
+                        ids = ids.concat(node.children_d);
                     }
                     context.method.delete(self.url.baselist ,{
                         ids : ids
