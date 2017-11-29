@@ -78086,7 +78086,7 @@ window.pdfMake = window.pdfMake || {}; window.pdfMake.vfs = {"LICENSE.txt":"DQog
 			"data": data,
 			"success": function (json) {
                 if( json.code && json.code != null && json.code == sysCode.UN_LOGIN)
-                    window.location.href = context.config.serviceName +  context.url.login;
+                    window.location.href =  context.url.login;
                 else if(json.code && json.code != null && json.code == sysCode.FORBIDDEN){
                     toastr.error("您目前无权限列表","错误");
                     return
