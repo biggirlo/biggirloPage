@@ -100,6 +100,7 @@ var context = {
                "url": url,
                "data": data,
                beforeSend: function (request) {
+                   request.setRequestHeader(context.hostPortName, context.config.hostPort);
                    request.setRequestHeader(context.tokenName, sessionStorage.getItem(context.tokenName));
                }
            };
