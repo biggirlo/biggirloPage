@@ -10,11 +10,19 @@ var index = {
     //初始化
     init:function(){
         index.method.menus(context.config.requestHost + index.url.menus);
+        index.method.initSysInfo();
     },
     page:{
         reLoadPageCount: 0 //重复加载次数
     },
     method: {
+        /**
+         * 初始化系统信息
+         */
+        initSysInfo:function () {
+            $("#systemInfoTitle").html(system.title);
+            $("#systemInfoName").html(system.tag);
+        },
         /**
          *加载页面
          * @param url

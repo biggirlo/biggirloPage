@@ -9,7 +9,7 @@
 var context = {
     config:{
         hostPort:"http://localhost:8080",//项目地址
-        requestHost:"http://127.0.0.1:8081/base", //请求地址
+        requestHost:"http://127.0.0.1:8082/official-website", //请求地址
     },
     url:{
        login:  '../../../page/system/login/login.html'

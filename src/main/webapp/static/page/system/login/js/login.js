@@ -9,7 +9,8 @@ $(function () {
             url:{
                 login:context.config.requestHost + '/system/login',
                 index : '../index/',
-            }
+            },
+            system: system
         },
         mounted:function () {
 

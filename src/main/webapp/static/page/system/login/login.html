@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>biggirlos | 基础框架</title>
+    <title>{{system.title}}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -41,16 +41,16 @@
         <!---->
         <div class="login-logo">
             <div class="login-logo-img">
-                <img src="image/logo.png">
+                <img :src="system.logo">
             </div>
             <div class="login-logo-text">
-                biggirlos
+                {{system.tag}}
             </div>
             <div class="login-big-logo">
-                <img src="image/bg-1.jpg">
+                <!--<img src="image/bg-1.jpg">-->
             </div>
             <div class="login-from">
-                <div class="login-from-title">biggirlos | 后台管理</div>
+                <div class="login-from-title">{{system.name}}</div>
                 <div class="splace-1"></div>
                 <form id="userForm">
                     <div class="login-from-input">
@@ -102,6 +102,7 @@
     <script src="../../../common/common.js"></script>
     <!--vue.js-->
     <script src="../../../assets/global/plugins/vue/vue.js"></script>
+    <script src="../../../common/system.js"></script>
     <script src="js/login.js"></script>
 </body>
 </html>

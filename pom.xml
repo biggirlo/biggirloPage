@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.biggirlo.page</groupId>
-	<artifactId>page</artifactId>
+	<groupId>com.ruiji.page</groupId>
+	<artifactId>base</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -29,4 +29,36 @@
 				</plugin>
 		</plugins>
 	</build>
+
+	<!--远程地址-->
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://192.168.0.100:8081/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://192.168.0.100:8081/nexus/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<!-- 在POM中配置构件部署地址 -->
+	<distributionManagement>
+		<!-- 发布版本的构件的仓库 -->
+		<repository>
+			<id>thirdparty</id>
+			<name>3rd party</name>
+			<url>http://192.168.0.100:8081/nexus/content/repositories/thirdparty</url>
+		</repository>
+		<!-- 快照版本的仓库-->
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Snapshots</name>
+			<url>http://192.168.0.100:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
